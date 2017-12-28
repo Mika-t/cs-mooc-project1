@@ -14,7 +14,7 @@
                 <th>address</th>
             </tr>
             <tr th:each="signup : ${signups}">
-                <!--using th.utext allows for user input script to be executed-->
+                <!--using th.utext allows for userinput script to be executed-->
                 <td th:utext="${signup.name}">name</td>
                 <td th:utext="${signup.address}">address</td>
             </tr>
