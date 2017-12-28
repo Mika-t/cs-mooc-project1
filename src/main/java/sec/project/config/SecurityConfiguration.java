@@ -22,7 +22,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // no real security at the moment
         http.authorizeRequests()
-                .anyRequest().permitAll();
+                .antMatchers("/","home").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+            .logout()
+                .permitAll();
+  
         //disable csrf
         http.csrf().disable();
     }
@@ -30,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
     }
 
     @Bean
