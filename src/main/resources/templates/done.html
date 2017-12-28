@@ -6,6 +6,19 @@
     <body>
 
         <h1>Thank you! You have been signed up to the event!</h1>
+        <p> Your details:</p>
+        
+        <table>
+            <tr>
+                <th>Signed up with name</th>
+                <th>address</th>
+            </tr>
+            <tr th:each="signup : ${signups}">
+                <!--using th.utext allows for user input script to be executed-->
+                <td th:utext="${signup.name}">name</td>
+                <td th:utext="${signup.address}">address</td>
+            </tr>
+        </table>
 
     </body>
 </html>
